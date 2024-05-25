@@ -264,7 +264,10 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
-        elixirls = {},
+        -- elixirls = {},
+        html = {},
+        lexical = {},
+        cssls = {},
         emmet_language_server = {},
         lua_ls = {
           -- cmd = {...},
@@ -351,12 +354,14 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'rafamadriz/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      require('luasnip.loaders.from_vscode').lazy_load()
 
       cmp.setup {
         snippet = {
@@ -507,3 +512,4 @@ require('lazy').setup({
 -- My custom configurations --
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.api.nvim_command 'set guicursor=a:blinkon1'
+vim.api.nvim_command 'hi NonText guifg=bg'
